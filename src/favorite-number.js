@@ -10,7 +10,7 @@ function FavoriteNumber({min = 1, max = 9}) {
   const isValid = !numberEntered || (number >= min && number <= max)
   return (
     <div>
-      <label htmlFor="favorite-number">Favorite Number</label>
+      <label htmlFor="favorite-number">Favorite number</label>
       <input
         id="favorite-number"
         type="number"
