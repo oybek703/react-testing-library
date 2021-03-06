@@ -16,7 +16,6 @@
   "dependencies": {
     "@reach/router": "^1.3.4",
     "@testing-library/dom": "^7.28.1",
-    "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/react-hooks": "^3.4.2",
     "@testing-library/user-event": "^12.4.0",
@@ -82,6 +81,7 @@
   },
   "homepage": "https://github.com/kentcdodds/react-testing-library-course#readme",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
     "kcd-scripts": "^7.7.0"
   }
 }
