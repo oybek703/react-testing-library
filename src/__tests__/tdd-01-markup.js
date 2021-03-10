@@ -44,3 +44,13 @@ test('renders a form with title, content, tags and submit button', async () => {
               {...fakePost, date: expect.any(String), authorId: fakeUser.id}))
   expect(Redirect).toHaveBeenCalledWith({to: '/'}, {})
 })
+
+test('renders error message when post save rejected', async () => {
+  const testError = 'TEST ERROR'
+  mockSavePost.mockRejectedValueOnce({data: {error: testError}})
+  const {getByText, findByRole} = render(<Editor/>)
+  const submitButton = getByText(/submit/i)
+  fireEvent.click(submitButton)
+  expect(await findByRole('alert')).toHaveTextContent(testError)
+  expect(submitButton).not.toBeDisabled()
+})
