@@ -1,20 +1,24 @@
-import * as React from 'react'
+import React, {useState} from 'react'
+
 
 function Editor() {
-  return (
-    <form>
-      <label htmlFor="title-input">Title</label>
-      <input id="title-input" />
+    const [isSaving, setIsSaving] = useState(false)
+    function handleSubmit(e) {
+        e.preventDefault()
+        setIsSaving(true)
+    }
+    return <form onSubmit={handleSubmit}>
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title"/>
 
-      <label htmlFor="content-input">Content</label>
-      <textarea id="content-input" />
+        <label htmlFor="content">Content</label>
+        <textarea id="content" cols="30" rows="10"></textarea>
 
-      <label htmlFor="tags-input">Tags</label>
-      <input id="tags-input" />
+        <label htmlFor="tags">Tags</label>
+        <textarea id="tags" cols="30" rows="10"></textarea>
 
-      <button type="submit">Submit</button>
+        <button disabled={isSaving}>Submit</button>
     </form>
-  )
 }
 
 export {Editor}
