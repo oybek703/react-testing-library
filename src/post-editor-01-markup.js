@@ -13,7 +13,7 @@ function Editor() {
         savePost({
             title: title.value,
             content: content.value,
-            tags: tags.value.split(', '),
+            tags: tags.value.split(', ').map(t => t.trim()),
             authorId: 'user-1',
             date: new Date().toISOString()
         }).then(() => setIsSaved(true))

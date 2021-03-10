@@ -13,8 +13,8 @@ afterEach(() => jest.clearAllMocks())
 
 const postBuilder = build('Post').fields({
   title: fake(f => f.lorem.words()),
-  content: fake(f => f.lorem.paragraphs()),
-  tags: fake(f => [f.lorem.words(), f.lorem.words(), f.lorem.words() ])
+  content: fake(f => f.lorem.paragraphs().replace(/\r/g, '')),
+  tags: fake(f => [f.lorem.words(), f.lorem.words(), f.lorem.words()])
 })
 
 const userBuilder = build('User').fields({
@@ -39,6 +39,8 @@ test('renders a form with title, content, tags and submit button', async () => {
   expect(date).toBeGreaterThanOrEqual(preDate)
   expect(date).toBeLessThanOrEqual(postDate)
   await waitFor(() =>
-      expect(mockSavePost).toHaveBeenCalledWith({...fakePost, authorId: fakeUser.id}))
+      expect(mockSavePost)
+          .toHaveBeenCalledWith(
+              {...fakePost, date: expect.any(String), authorId: fakeUser.id}))
   expect(Redirect).toHaveBeenCalledWith({to: '/'}, {})
 })
