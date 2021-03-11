@@ -1,17 +1,12 @@
-import * as React from 'react'
+import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
-import {render, screen} from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import {Main} from '../main'
+import {render, fireEvent} from '@testing-library/react'
+import {Main} from "main"
 
-test('main renders about and home and I can navigate to those pages', () => {
-  window.history.pushState({}, 'Test page', '/')
-  render(
-    <BrowserRouter>
-      <Main />
-    </BrowserRouter>,
-  )
-  expect(screen.getByRole('heading')).toHaveTextContent(/home/i)
-  userEvent.click(screen.getByText(/about/i))
-  expect(screen.getByRole('heading')).toHaveTextContent(/about/i)
+test('main renders about and home and i can navigate to those pages', () => {
+  const {getByRole, getByText} = render(<BrowserRouter><Main/></BrowserRouter>)
+  expect(getByRole('heading')).toHaveTextContent(/home/i)
+  expect(getByText(/about/i)).toHaveTextContent(/about/i)
+  fireEvent.click(getByText(/about/i))
+  expect(getByRole('heading')).toHaveTextContent(/about/i)
 })
